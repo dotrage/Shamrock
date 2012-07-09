@@ -1,0 +1,18 @@
+#ErrorDocument 401	/error.php
+#ErrorDocument 403	/error.php
+#ErrorDocument 404	/error.php
+
+<files "*.inc">
+order allow,deny
+deny from all
+</files>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !(\.[^./]+)$
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteRule ^(.*)$ index.php?uri=$1 [L,QSA]
+</IfModule>
